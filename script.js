@@ -1,10 +1,11 @@
 const starsContainer = document.getElementById('stars-container');
 
-for (let i = 0; i < 500; i++) {
+// Generar estrellas de fondo
+for (let i = 0; i < 400; i++) {
     let star = document.createElement('div');
     star.className = 'star';
     
-    let size = Math.random() * 3.5;
+    let size = Math.random() * 3;
     star.style.width = size + 'px';
     star.style.height = size + 'px';
     
@@ -20,7 +21,12 @@ for (let i = 0; i < 500; i++) {
 const svg = document.getElementById('svg');
 const animations = svg.querySelectorAll('animate');
 
-const phrases = ["Mi vida", "Mi cielo", "Mi todo", "Corazón", "Amor mío", "My everything", "Sweetheart", "Darling", "Eres mi mundo", "Mi lugar seguro", "Mi estrella favorita", "Solo tú", "Mi única certeza", "Mi destino", "Hermosa", "Mi reina", "Perfecta", "Mi sol"];
+const phrases = [
+    "Mi vida", "Mi cielo", "Mi todo", "Corazón", "Amor mío", 
+    "My everything", "Sweetheart", "Darling", "Eres mi mundo", 
+    "Mi lugar seguro", "Mi estrella favorita", "Solo tú", 
+    "Mi única certeza", "Mi destino", "Hermosa", "Mi reina", "Perfecta", "Mi sol"
+];
 
 let phraseInterval = null;
 
@@ -30,7 +36,7 @@ function spawnPhrase() {
     phraseEl.innerText = phrases[Math.floor(Math.random() * phrases.length)];
 
     const angle = Math.random() * Math.PI * 2;
-    const distance = 150 + Math.random() * 250; 
+    const distance = 120 + Math.random() * 180; 
     
     const tx = Math.cos(angle) * distance + 'px';
     const ty = Math.sin(angle) * distance + 'px';
@@ -45,11 +51,21 @@ function spawnPhrase() {
     }, 3500);
 }
 
-svg.addEventListener('mouseenter', () => {
+// Función que activa la animación y las frases
+function triggerInteraction() {
     animations.forEach(anim => anim.beginElement());
     
-    if(!phraseInterval) {
+    if (!phraseInterval) {
         spawnPhrase(); 
         phraseInterval = setInterval(spawnPhrase, 800);
     }
-});
+}
+
+// Eventos para PC (Mouse)
+svg.addEventListener('mouseenter', triggerInteraction);
+
+// Eventos para Celulares (Táctil)
+svg.addEventListener('touchstart', (e) => {
+    e.preventDefault(); // Evita comportamientos extraños del navegador móvil al tocar
+    triggerInteraction();
+}, { passive: false });
