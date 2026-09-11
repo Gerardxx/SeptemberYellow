@@ -1,19 +1,20 @@
-*{
+* {
     cursor: url('leaf.png'), auto !important;
-
+    box-sizing: border-box;
 }
 
 body {
   margin: 0;
   padding: 0;
-  background-color: #0a0a14;
-  /* Gradiente radial para simular la profundidad del cielo nocturno */
+  /* Fondo oscuro asegurado con gradiente radial */
+  background: #090a0f;
   background: radial-gradient(ellipse at center, #1b2735 0%, #090a0f 100%);
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  overflow: hidden; /* Evita barras de scroll por las estrellas y frases flotantes */
+  min-height: 100vh;
+  width: 100vw;
+  overflow: hidden;
 }
 
 .stars-container {
@@ -46,13 +47,16 @@ body {
   flex-direction: column;
   align-items: center;
   text-align: center;
+  width: 90%;
+  max-width: 400px;
+  padding: 20px;
 }
 
 .elegant-title {
-  font-family: "Indie Flower";
+  font-family: "Indie Flower", cursive;
   color: #FFEB3B;
-  font-size: 4rem;
-  margin: 0 0 20px 0;
+  font-size: clamp(2.5rem, 8vw, 4rem); 
+  margin: 0 0 15px 0;
   text-shadow: 0 0 15px rgba(255, 235, 59, 0.5);
   opacity: 0;
   transform: translateY(-20px);
@@ -68,16 +72,18 @@ body {
 
 .svg-container {
   width: 100%;
-  max-width: 400px;
+  max-width: min(70vw, 280px); 
   filter: drop-shadow(0 0 15px rgba(255, 235, 59, 0.3)); 
 }
 
 #svg {
   cursor: pointer; 
   transition: filter 0.3s ease;
+  width: 100%;
+  height: auto;
 }
 
-#svg:hover {
+#svg:hover, #svg:active {
   filter: drop-shadow(0 0 25px rgba(255, 235, 59, 0.6)); 
 }
 
@@ -87,11 +93,12 @@ body {
   top: 50%;
   color: #FFEB3B;
   font-family: "Indie Flower", cursive;
-  font-size: 2.5rem;
+  font-size: clamp(1.5rem, 6vw, 2.5rem); 
   text-shadow: 0 0 10px rgba(255, 235, 59, 0.8), 0 0 20px #F57F17;
   pointer-events: none; 
   z-index: 10;
   opacity: 0;
+  white-space: nowrap;
   animation: floatTowardsMe 3.5s ease-in-out forwards;
 }
 
@@ -105,6 +112,6 @@ body {
   }
   100% {
     opacity: 0;
-    transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(3);
+    transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(2.5);
   }
 }
