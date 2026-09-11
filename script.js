@@ -20,7 +20,7 @@ for (let i = 0; i < 500; i++) {
 const svg = document.getElementById('svg');
 const animations = svg.querySelectorAll('animate');
 
-const phrases = ["Te Amo", "My Love", "Mi Amor", "Eres mi universo", "Siempre tú", "Preciosa"];
+const phrases = ["Mi vida", "Mi cielo", "Mi todo", "Corazón", "Amor mío", "My everything", "Sweetheart", "Darling", "Eres mi mundo", "Mi lugar seguro", "Mi estrella favorita", "Solo tú", "Mi única certeza", "Mi destino", "Hermosa", "Mi reina", "Perfecta", "Mi sol"];
 
 let phraseInterval = null;
 
