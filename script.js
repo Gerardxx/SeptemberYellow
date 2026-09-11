@@ -52,7 +52,9 @@ function spawnPhrase() {
 }
 
 // Función que activa la animación y las frases
-function triggerInteraction() {
+function triggerInteraction(e) {
+    if (e) e.preventDefault();
+    
     animations.forEach(anim => anim.beginElement());
     
     if (!phraseInterval) {
@@ -64,8 +66,7 @@ function triggerInteraction() {
 // Eventos para PC (Mouse)
 svg.addEventListener('mouseenter', triggerInteraction);
 
-// Eventos para Celulares (Táctil)
-svg.addEventListener('touchstart', (e) => {
-    e.preventDefault(); // Evita comportamientos extraños del navegador móvil al tocar
-    triggerInteraction();
-}, { passive: false });
+// Eventos para Celulares (Táctil en todo el contenedor o la flor)
+const contentContainer = document.querySelector('.content-container');
+contentContainer.addEventListener('touchstart', triggerInteraction, { passive: false });
+contentContainer.addEventListener('click', triggerInteraction); // Por si acaso soporta clics táctiles directos
